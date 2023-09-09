@@ -5,7 +5,7 @@ dotenv.config()
 import https from 'https'
 
 const app = express()
-console.log('URI : ',process.env.URI);
+
 app.use(cors({origin:process.env.URI}))
 
 app.get('/',(req,res)=>res.status(200).send('home'))
