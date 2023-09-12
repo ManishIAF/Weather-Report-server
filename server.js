@@ -6,7 +6,7 @@ import https from 'https'
 
 const app = express()
 
-app.use(cors({origin:[process.env.URI]}))
+app.use(cors({origin:[process.env.URI,'http://localhost:3000']}))
 
 app.get('/',(req,res)=>res.status(200).send('home'))
 
