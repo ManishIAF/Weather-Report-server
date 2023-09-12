@@ -23,15 +23,16 @@ app.get('/api/weatherReport',(req,res)=>{
         
         https.get(url , (response)=>{
             
-            response.on("data", async(data)=>{
-            const weatherData = await JSON.parse(data);
-            res.status(200).send(weatherData)
+                response.on("data", async(data)=>{
+                const weatherData = await JSON.parse(data);
+                console.log('weatherData : ',weatherData);
+                res.status(200).send(weatherData)
             });   
 
         });
         
     } catch (error) {
-
+        console.log('error : ',error);
         res.status(500).send('server error')
         
     }
