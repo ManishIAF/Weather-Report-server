@@ -8,7 +8,6 @@ const app = express()
 
 app.use(cors({origin:[process.env.URI,'http://localhost:3000']}))
 
-app.get('/',(req,res)=>res.status(200).send('home'))
 
 app.get('/api/weatherReport', (req, res) => {
   try {
@@ -30,18 +29,23 @@ app.get('/api/weatherReport', (req, res) => {
       });
 
       response.on('end', async () => {
-        try {
-          const weatherData = JSON.parse(data);
+        
+            try {
+                const weatherData = JSON.parse(data);
 
-          if (weatherData.cod === '200') {
-            res.status(200).send(weatherData);
-          } else {
-            res.status(weatherData.cod).send(weatherData.message);
-          }
-        } catch (parseError) {
-          res.status(500).send('Error parsing weather data');
-        }
-      });
+                if (weatherData.cod === '200') {
+                    res.status(200).send(weatherData);
+                } else {
+                    res.status(weatherData.cod).send(weatherData.message);
+                }
+            
+            } catch (parseError) {
+            
+                res.status(500).send('Error parsing weather data');
+            
+            }
+      
+        });
     });
   } catch (error) {
     res.status(500).send('Server error');
